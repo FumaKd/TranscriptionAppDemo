@@ -1,8 +1,20 @@
 <script setup>
+import { ref } from "vue"
 import TranscriptControllerComponent from "./TranscriptControllerComponent.vue"
 import MemoManagementControllerComponent from "./MemoManagementControllerComponent.vue"
 import { useTranscription } from "@/transcription"
+
 const {recognition, transcriptDisplay, startBtnPressed, stopBtnPressed} = useTranscription()
+const isProgressSpeechRecognition = ref(false)
+
+function startRecognition() {
+    isProgressSpeechRecognition.value = true
+    startBtnPressed()
+}
+function stopRecognition() {
+    isProgressSpeechRecognition.value = false
+    stopBtnPressed()
+}
 </script>
 
 <template>
@@ -14,12 +26,15 @@ const {recognition, transcriptDisplay, startBtnPressed, stopBtnPressed} = useTra
             </v-col>
             <v-col align-self="end" class="pb-9">
                 <TranscriptControllerComponent
-                    @pressedStartButton="startBtnPressed"
-                    @pressedStopButton="stopBtnPressed"
+                    :speechRecognitionProgressFlag="isProgressSpeechRecognition"
+                    @pressedStartButton="startRecognition"
+                    @pressedStopButton="stopRecognition"
                 ></TranscriptControllerComponent>
-                <MemoManagementControllerComponent></MemoManagementControllerComponent>
-                <v-btn @click="" class="mr-6" prepend-icon="mdi-content-save-all">保存</v-btn>
-                <v-btn @click="" prepend-icon="mdi-trash-can">削除</v-btn>
+                <MemoManagementControllerComponent
+                    :speechRecognitionProgressFlag="isProgressSpeechRecognition"
+                    @pressedSaveButton="console.log('save')"
+                    @pressedDeleteButton="console.log('delete')"
+                ></MemoManagementControllerComponent>
             </v-col>
         </v-row>
         <v-row>
