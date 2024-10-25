@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MeetingDetail from '@/views/MeetingDetail.vue'
 import MeetingList from '../views/MeetingList.vue'
-import SpeechRecognition from "../views/SpeechRecognition.vue"
+import NewMeeting from "../views/NewMeeting.vue"
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/transcription',
     name: 'transcription',
-    component: SpeechRecognition
+    component: NewMeeting
   }
 ]
 
