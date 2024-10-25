@@ -1,17 +1,17 @@
-import { ref, computed } from "vue"
+import { ref, watch } from "vue"
 
 export function useTranscription() {
     // フィールド用意
     const userStopFlug = ref(false)
-    let prependTextForError = ""
+    let SavedTextContentWhenErrorOccurred = ref("")
     const transcriptResults = ref()
-    const transcriptDisplay = computed(() => {
-        let text = prependTextForError
-        if (transcriptResults.value == undefined) return;
-        for (let i of transcriptResults.value){
-            text += i[0].transcript;
-        }
-        return text
+    const transcriptDisplay = ref("")
+    const resultCouner = ref(0)
+    watch(transcriptResults, () => {
+        let resultData = transcriptResults.value[transcriptResults.value.length - 1]
+        console.log(resultData)
+        if (resultData.isFinal) transcriptDisplay.value += resultData[0].transcript
+        resultCouner.value += 1
     })
 
     // 音声認識設定
@@ -26,7 +26,7 @@ export function useTranscription() {
         transcriptResults.value = event.results
     }
     recognition.onend = (event) => {
-        prependTextForError = transcriptDisplay.value == undefined ? "" : transcriptDisplay.value
+        SavedTextContentWhenErrorOccurred.value = transcriptDisplay.value == undefined ? "" : transcriptDisplay.value
         
         if (userStopFlug.value) {
             userStopFlug.value = false
