@@ -43,7 +43,7 @@ function deleteTranscription() {
 <template>
     <v-container>
         <v-row>
-            <v-col align-self="end">
+            <v-col align-self="end" class="text-grey-lighten-1">
                 タイトル
                 <v-text-field v-model="titleInputed" label="タイトル" class="mr-6"></v-text-field>
             </v-col>
@@ -61,7 +61,7 @@ function deleteTranscription() {
             </v-col>
         </v-row>
         <v-row>
-            <v-col>
+            <v-col class="text-grey-lighten-1">
                 議事内容
                 <v-textarea
                     label="議事録"
