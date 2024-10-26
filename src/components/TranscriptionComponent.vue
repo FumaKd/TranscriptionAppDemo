@@ -67,6 +67,8 @@ function deleteTranscription() {
                     label="議事録"
                     v-model="transcriptDisplay"
                     :model-value="transcriptDisplay"
+                    auto-grow
+                    rows="10"
                 ></v-textarea>
             </v-col>
         </v-row>
