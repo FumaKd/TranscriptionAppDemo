@@ -24,7 +24,6 @@ export function createData(data) {
 
 export function updateData(data) {
     for (let i of allData.value) {
-        console.log(i)
         if (i.id == data.id) {
             i.title = data.title
             i.document = data.document

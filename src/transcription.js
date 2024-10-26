@@ -9,7 +9,6 @@ export function useTranscription() {
     const resultCouner = ref(0)
     watch(transcriptResults, () => {
         let resultData = transcriptResults.value[transcriptResults.value.length - 1]
-        console.log(resultData)
         if (resultData.isFinal) transcriptDisplay.value += resultData[0].transcript
         resultCouner.value += 1
     })
