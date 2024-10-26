@@ -26,7 +26,6 @@ function getDocumentShortened(doc) {
                     新規作成
                 </v-chip>
             </v-col>
-            
         </v-row>
         <v-row justify="start" class="ma-1">
             <v-card
@@ -51,7 +50,7 @@ function getDocumentShortened(doc) {
                 <v-card-text class="text-white opacity-70">
                     {{ getDocumentShortened(data.document) }}
                 </v-card-text>
-                </v-card>
+            </v-card>
         </v-row> 
     </v-container>
 </template>
