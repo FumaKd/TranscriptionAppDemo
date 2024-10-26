@@ -6,9 +6,9 @@ const props = defineProps(["allData"])
     <v-container>
         <v-row>
             <v-col>
-                <h1>議事録一覧</h1>
+                <h1 class="text-grey-lighten-1">議事録一覧</h1>
             </v-col>
-            <v-col class="ma-0" align="right" align-self="bottom">
+            <v-col class="ma-0" align="right">
                 <v-chip
                     color="blue"
                     @click="$router.push('transcription')"
@@ -19,26 +19,24 @@ const props = defineProps(["allData"])
             </v-col>
             
         </v-row>
-        <v-row>
-            <h2>サブタイトル</h2>
-        </v-row>
-        <v-row>
-            <v-card
-                width="250"
-                height="100"
-                v-for="data of allData"
-                :key="data.id"
-                elevation="2"
-                class="ma-2"
-                @click="$router.push(`/detail/${ data.id }`)"
-            >
-                <v-card-title>
-                    {{ data.title }}
-                </v-card-title>
-                <v-card-subtitle>
-                    {{ data.date }}
-                </v-card-subtitle>
-            </v-card>
-        </v-row> 
+        <v-row justify="start" class="ma-1">
+                <v-card
+                    width="300"
+                    height="150"
+                    v-for="data of allData"
+                    :key="data.id"
+                    color="#BC671D"
+                    elevation="3"
+                    class="ma-4"
+                    @click="$router.push(`/detail/${ data.id }`)"
+                >
+                    <v-card-title class="text-grey-lighten-2">
+                        {{ data.title }}
+                    </v-card-title>
+                    <v-card-subtitle >
+                        最終更新: {{ data.date }}
+                    </v-card-subtitle>
+                </v-card>        
+            </v-row> 
     </v-container>
 </template>

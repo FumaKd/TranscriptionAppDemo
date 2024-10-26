@@ -8,7 +8,7 @@ provide("allData", allData)
 
 <template>
     <v-app>
-        <v-main>
+        <v-main style="background-color: #28211C">
                 <router-view/>
         </v-main>
     </v-app>
