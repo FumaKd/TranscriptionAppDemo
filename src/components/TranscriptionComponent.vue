@@ -4,7 +4,7 @@ import TranscriptControllerComponent from "./TranscriptControllerComponent.vue"
 import MemoManagementControllerComponent from "./MemoManagementControllerComponent.vue"
 import { useTranscription } from "@/transcription"
 
-const props = defineProps(["defaultData"])
+const props = defineProps(["defaultData", "errorMsg"])
 const emits = defineEmits(["doCreate", "doDelete", "doUpdate"])
 
 const titleInputed = ref("")
@@ -70,6 +70,12 @@ function deleteTranscription() {
                     auto-grow
                     rows="10"
                 ></v-textarea>
+            </v-col>
+        </v-row>
+        <v-row v-show="errorMsg">
+            <v-col class="text-red-accent-4">
+                <v-icon icon="mdi-alert-circle-outline"></v-icon>
+                {{ errorMsg }}
             </v-col>
         </v-row>
     </v-container>
