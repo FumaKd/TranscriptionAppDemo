@@ -18,6 +18,7 @@ export function getAllData() {
 export function createData(data) {
     data.id = generateUUID()
     data.date = new Date().toLocaleString()
+    console.log(data.title == "")
     if (data.title == "") {
         return "タイトルが入力されていません"
     } else if (data.document == "") {
@@ -31,12 +32,18 @@ export function createData(data) {
 export function updateData(data) {
     for (let i of allData.value) {
         if (i.id == data.id) {
+            if (data.title == "") {
+                return "タイトルが入力されていません"
+            } else if (data.document == "") {
+                return "議事録内容が入力されていません"
+            }
             i.title = data.title
             i.document = data.document
             i.date = new Date().toLocaleString()
         }
     }
     saveStorageData(allData)
+    return ""
 }
 
 export function deleteData(id) {

@@ -11,10 +11,14 @@ const route = useRoute()
 const allData = inject("allData")
 const targetId = route.params.MeetingId
 const defaultData = ref(allData.value.filter((item) => item.id == targetId)[0])
+const errorMsg = ref("")
 
 function updateFunction(arg) {
-    updateData(arg)
-    router.push({name: "home"})
+    errorMsg.value = updateData(arg)
+    console.log(errorMsg.value)
+    if (errorMsg.value == "") {
+        router.push({name: "home"})
+    }
 }
 function deleteFunction(arg) {
     if (arg) deleteData(arg)
@@ -27,5 +31,6 @@ function deleteFunction(arg) {
         :default-data="defaultData"
         @doUpdate="(arg) => updateFunction(arg)"
         @doDelete="(arg) => deleteFunction(arg)"
+        :error-msg="errorMsg"
     ></TranscriptionComponent>
 </template>
