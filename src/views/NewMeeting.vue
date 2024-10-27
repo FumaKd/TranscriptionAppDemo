@@ -1,13 +1,19 @@
 <script setup>
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { createData, deleteData } from "@/storage"
 import HeaderComponent from "../components/HeaderComponent.vue"
 import TranscriptionComponent from "@/components/TranscriptionComponent.vue"
 
 const router = useRouter()
+
+const errorMsg = ref("")
+
 function createFunction(arg) {
-    createData(arg)
-    router.push({name: "home"})
+    errorMsg.value = createData(arg)
+    if (errorMsg.value == "") {
+        router.push({name: "home"})
+    }
 }
 function deleteFunction(arg) {
     if (arg) deleteData(arg)
@@ -20,5 +26,6 @@ function deleteFunction(arg) {
     <TranscriptionComponent
         @doCreate="(arg) => createFunction(arg)"
         @doDelete="(arg) => deleteFunction(arg)"
+        :errorMsg="errorMsg"
     ></TranscriptionComponent>
 </template>
