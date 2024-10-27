@@ -15,7 +15,6 @@ const errorMsg = ref("")
 
 function updateFunction(arg) {
     errorMsg.value = updateData(arg)
-    console.log(errorMsg.value)
     if (errorMsg.value == "") {
         router.push({name: "home"})
     }

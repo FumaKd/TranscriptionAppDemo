@@ -18,7 +18,6 @@ export function getAllData() {
 export function createData(data) {
     data.id = generateUUID()
     data.date = new Date().toLocaleString()
-    console.log(data.title == "")
     if (data.title == "") {
         return "タイトルが入力されていません"
     } else if (data.document == "") {
