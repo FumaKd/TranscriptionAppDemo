@@ -38,6 +38,11 @@ function deleteTranscription() {
         emits("doDelete", false)
     }
 }
+
+// dev bellow
+const micStatusColor = ref("red-accent-4")
+
+
 </script>
 
 <template>
@@ -48,16 +53,21 @@ function deleteTranscription() {
                 <v-text-field v-model="titleInputed" label="タイトル" class="mr-6"></v-text-field>
             </v-col>
             <v-col align-self="end" class="pb-9">
-                <TranscriptControllerComponent
-                    :speechRecognitionProgressFlag="isProgressSpeechRecognition"
-                    @pressedStartButton="startRecognition"
-                    @pressedStopButton="stopRecognition"
-                ></TranscriptControllerComponent>
-                <MemoManagementControllerComponent
-                    :speechRecognitionProgressFlag="isProgressSpeechRecognition"
-                    @pressedSaveButton="saveTranscription"
-                    @pressedDeleteButton="deleteTranscription"
-                ></MemoManagementControllerComponent>
+                <v-row>
+                    <v-icon :class="`text-${micStatusColor}`" icon="mdi-microphone"></v-icon>
+                </v-row>
+                <v-row>
+                    <TranscriptControllerComponent
+                        :speechRecognitionProgressFlag="isProgressSpeechRecognition"
+                        @pressedStartButton="startRecognition"
+                        @pressedStopButton="stopRecognition"
+                    ></TranscriptControllerComponent>
+                    <MemoManagementControllerComponent
+                        :speechRecognitionProgressFlag="isProgressSpeechRecognition"
+                        @pressedSaveButton="saveTranscription"
+                        @pressedDeleteButton="deleteTranscription"
+                    ></MemoManagementControllerComponent>
+                </v-row>
             </v-col>
         </v-row>
         <v-row>
