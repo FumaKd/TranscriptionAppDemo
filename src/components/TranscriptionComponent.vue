@@ -48,15 +48,19 @@ function deleteTranscription() {
                 タイトル
                 <v-text-field v-model="titleInputed" label="タイトル" class="mr-6"></v-text-field>
             </v-col>
-            <v-col align-self="end" class="pb-9">
-                <v-row>
+            <v-col align-self="end" class="pb-11">
+                <v-row class="pb-1">
                     <v-chip
+                        v-show="isProgressSpeechRecognition"
                         prepend-icon="mdi-microphone"
                         variant="outlined"
-                        :class="{'text-green': recognitionFlug, 'text-red-accent-3': !recognitionFlug}"
+                        :class="{
+                            'text-green': recognitionFlug,
+                            'text-red-accent-3': !recognitionFlug,
+                        }"
                     >
-                        <template v-if="recognitionFlug">認識中</template>
-                        <template v-else>認識不可</template>
+                        <template v-if="recognitionFlug">文字起こし中</template>
+                        <template v-else>音声　未認識</template>
                     </v-chip>
                 </v-row>
                 <v-row>
