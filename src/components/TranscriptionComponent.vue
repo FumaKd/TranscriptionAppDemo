@@ -50,7 +50,14 @@ function deleteTranscription() {
             </v-col>
             <v-col align-self="end" class="pb-9">
                 <v-row>
-                    <v-icon :class="{'text-green': recognitionFlug, 'text-red-accent-3': !recognitionFlug}" icon="mdi-microphone"></v-icon>
+                    <v-chip
+                        prepend-icon="mdi-microphone"
+                        variant="outlined"
+                        :class="{'text-green': recognitionFlug, 'text-red-accent-3': !recognitionFlug}"
+                    >
+                        <template v-if="recognitionFlug">認識中</template>
+                        <template v-else>認識不可</template>
+                    </v-chip>
                 </v-row>
                 <v-row>
                     <TranscriptControllerComponent
