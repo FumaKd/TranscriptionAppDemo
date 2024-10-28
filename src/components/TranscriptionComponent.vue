@@ -8,7 +8,7 @@ const props = defineProps(["defaultData", "errorMsg"])
 const emits = defineEmits(["doCreate", "doDelete", "doUpdate"])
 
 const titleInputed = ref("")
-const {transcriptDisplay, startBtnPressed, stopBtnPressed} = useTranscription()
+const {transcriptDisplay, recognitionFlug, startBtnPressed, stopBtnPressed} = useTranscription()
 const isProgressSpeechRecognition = ref(false)
 // Meeting Detailの場合
 if (props.defaultData) {
@@ -39,10 +39,6 @@ function deleteTranscription() {
     }
 }
 
-// dev bellow
-const micStatusColor = ref("red-accent-4")
-
-
 </script>
 
 <template>
@@ -54,7 +50,7 @@ const micStatusColor = ref("red-accent-4")
             </v-col>
             <v-col align-self="end" class="pb-9">
                 <v-row>
-                    <v-icon :class="`text-${micStatusColor}`" icon="mdi-microphone"></v-icon>
+                    <v-icon :class="{'text-green': recognitionFlug, 'text-red-accent-3': !recognitionFlug}" icon="mdi-microphone"></v-icon>
                 </v-row>
                 <v-row>
                     <TranscriptControllerComponent
