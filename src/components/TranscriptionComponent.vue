@@ -8,7 +8,7 @@ const props = defineProps(["defaultData", "errorMsg"])
 const emits = defineEmits(["doCreate", "doDelete", "doUpdate"])
 
 const titleInputed = ref("")
-const {transcriptDisplay, startBtnPressed, stopBtnPressed} = useTranscription()
+const {transcriptDisplay, recognitionFlug, startBtnPressed, stopBtnPressed} = useTranscription()
 const isProgressSpeechRecognition = ref(false)
 // Meeting Detailの場合
 if (props.defaultData) {
@@ -38,6 +38,7 @@ function deleteTranscription() {
         emits("doDelete", false)
     }
 }
+
 </script>
 
 <template>
@@ -47,17 +48,33 @@ function deleteTranscription() {
                 タイトル
                 <v-text-field v-model="titleInputed" label="タイトル" class="mr-6"></v-text-field>
             </v-col>
-            <v-col align-self="end" class="pb-9">
-                <TranscriptControllerComponent
-                    :speechRecognitionProgressFlag="isProgressSpeechRecognition"
-                    @pressedStartButton="startRecognition"
-                    @pressedStopButton="stopRecognition"
-                ></TranscriptControllerComponent>
-                <MemoManagementControllerComponent
-                    :speechRecognitionProgressFlag="isProgressSpeechRecognition"
-                    @pressedSaveButton="saveTranscription"
-                    @pressedDeleteButton="deleteTranscription"
-                ></MemoManagementControllerComponent>
+            <v-col align-self="end" class="pb-11">
+                <v-row class="pb-1">
+                    <v-chip
+                        v-show="isProgressSpeechRecognition"
+                        prepend-icon="mdi-microphone"
+                        variant="outlined"
+                        :class="{
+                            'text-green': recognitionFlug,
+                            'text-red-accent-3': !recognitionFlug,
+                        }"
+                    >
+                        <template v-if="recognitionFlug">文字起こし中</template>
+                        <template v-else>音声　未認識</template>
+                    </v-chip>
+                </v-row>
+                <v-row>
+                    <TranscriptControllerComponent
+                        :speechRecognitionProgressFlag="isProgressSpeechRecognition"
+                        @pressedStartButton="startRecognition"
+                        @pressedStopButton="stopRecognition"
+                    ></TranscriptControllerComponent>
+                    <MemoManagementControllerComponent
+                        :speechRecognitionProgressFlag="isProgressSpeechRecognition"
+                        @pressedSaveButton="saveTranscription"
+                        @pressedDeleteButton="deleteTranscription"
+                    ></MemoManagementControllerComponent>
+                </v-row>
             </v-col>
         </v-row>
         <v-row>
